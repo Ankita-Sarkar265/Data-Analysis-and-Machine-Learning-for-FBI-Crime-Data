@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="fade-in container my-5">
+
+  <div class="card card-glow shadow-lg p-4 mb-4">
+    <h2 class="mb-3 text-center text-highlight"><i class="fas fa-upload me-2"></i>Upload Your Evidence</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data" class="needs-validation mt-3" novalidate>
+      {{ form.hidden_tag() }} 
+      <div class="mb-3">
+        <label for="evidence" class="form-label">Select Document (PDF, DOCX, TXT only)</label>
+        <input type="file" class="form-control" id="evidence" name="file" accept=".pdf,.docx,.txt" required>
+        <div class="invalid-feedback">Please upload a valid file (PDF, DOCX, or TXT).</div>
+      </div>
+
+      <button type="submit" class="btn btn-detective">
+        <i class="fas fa-shield-alt me-1"></i> Upload and Secure
+      </button>
+    </form>
+    <!-- ✅ ADD THIS DROPDOWN-LIKE BUTTON GROUP HERE -->
+    <div class="d-flex gap-3 mt-4 justify-content-center">
+      <a href="{{ url_for('view_chain') }}" class="btn btn-primary">
+        <i class="fas fa-link"></i> View Blockchain Ledger
+      </a>
+      <a href="{{ url_for('verify_chain') }}" class="btn btn-success">
+        <i class="fas fa-shield-check"></i> Verify Blockchain Integrity
+      </a>
+    </div>
+
+    {% if filename %}
+      <div class="alert alert-info mt-4">
+        <strong>File uploaded and encrypted successfully!</strong><br>
+        <a href="{{ url_for('uploaded_file', filename=filename) }}" target="_blank" class="text-highlight">
+          <i class="fas fa-file-alt me-1"></i> View Uploaded File
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="card card-glow shadow-lg p-4 mt-4">
+    <h4 class="text-highlight mb-3">🔐 How It Works</h4>
+    <p>
+      Your document is encrypted using advanced AES encryption and stored on a tamper-proof blockchain.
+      Each record is linked to the previous one, ensuring data integrity. If any record is altered,
+      the system will instantly detect it.
+    </p>
+    <img src="https://enterprise.cellebrite.com/wp-content/uploads/2021/12/BlogPostPic_DigitalEvidence-option2.jpeg"
+         alt="Blockchain Visualization"
+         class="img-fluid rounded mt-3">
+  </div>
+
+</div>
+
+<script>
+  // Bootstrap validation script
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
+{% endblock %}

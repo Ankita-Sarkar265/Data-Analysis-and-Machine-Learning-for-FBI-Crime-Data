@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Decrypted View: {{ filename }}</h2>
+<table class="table table-bordered">
+    {% for row in rows %}
+        <tr>
+        {% for cell in row %}
+            <td>{{ cell }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('admin_files') }}" class="btn btn-secondary">Back</a>
+{% endblock %}

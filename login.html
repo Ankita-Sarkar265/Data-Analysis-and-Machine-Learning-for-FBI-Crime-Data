@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card p-4 shadow-lg" style="max-width: 700px; width: 100%;">
+      <h2 class="text-center text-primary mb-4"><i class="fas fa-sign-in-alt me-2"></i>Officer Login</h2>
+   {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" autocomplete="off" class="needs-validation" novalidate>
+    
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" required autocomplete="off" value="" autofocus>
+      <div class="invalid-feedback">Please enter your username.</div>
+    </div>
+
+    <div class="mb-3" style="position:relative;">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password" value="">
+      <span id="togglePassword" style="position: absolute; top: 38px; right: 15px; cursor: pointer; user-select: none;"></span>
+      <div class="invalid-feedback">Please enter your password.</div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-success w-30 ">Login</button>
+  </form>
+ </div>
+</div>
+
+<p class="text-center">
+  Don’t have an account? <a href="{{ url_for('officer_register') }}">Register here</a>
+</p>
+
+<script>
+  // Bootstrap validation styling
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
+  // Toggle password visibility
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+
+  togglePassword?.addEventListener('click', function () {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+  });
+</script>
+{% endblock %}

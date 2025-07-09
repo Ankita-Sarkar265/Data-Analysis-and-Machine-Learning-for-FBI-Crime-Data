@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Blockchain Ledger</h1>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Index</th>
+        <th scope="col">Timestamp</th>
+        <th scope="col">Data</th>
+        <th scope="col">Previous Hash</th>
+        <th scope="col">Current Hash</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for block in blockchain %}
+      <tr>
+        <td>{{ block['index'] }}</td>
+        <td>{{ block['timestamp'] }}</td>
+        <td>{{ block['data'] }}</td>
+        <td>{{ block['previous_hash'] }}</td>
+        <td>{{ block['hash'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- templates/predict_form.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Crime Prediction Form</h2>
+  <div class="card shadow p-4">
+    <form method="POST" action="{{ url_for('predict_from_form') }}">
+    {{ form.csrf_token }}
+
+    <label>{{ form.location_type.label }}</label>
+    {{ form.location_type(class="form-control") }}
+
+    <label>{{ form.time_of_day.label }}</label>
+    {{ form.time_of_day(class="form-control") }}
+
+    <label>{{ form.day_of_week.label }}</label>
+    {{ form.day_of_week(class="form-control") }}
+
+    <label>{{ form.weapon_involved.label }}</label>
+    {{ form.weapon_involved(class="form-control") }}
+
+    <label>{{ form.known_offender.label }}</label>
+    {{ form.known_offender(class="form-control") }}
+
+    <label>{{ form.prior_incidents.label }}</label>
+    {{ form.prior_incidents(class="form-control") }}
+
+    <label>{{form.num_suspects.label}}</label>
+    {{ form.num_suspects(class="form-control")}}
+
+    {{ form.submit(class="btn btn-primary mt-3") }}
+</form>
+  </div>
+</div>
+{% endblock %}

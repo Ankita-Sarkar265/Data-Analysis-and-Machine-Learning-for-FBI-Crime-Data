@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0"><i class="fas fa-map-marked-alt me-2"></i>Crime Heatmap with Bubbles</h3>
+    </div>
+    <div class="card-body">
+      <!-- Filters -->
+      <form method="POST" class="row g-3 mb-4">
+        {{ form.hidden_tag() }}
+        <div class="col-md-5">
+          {{ form.time_of_day.label(class="form-label") }}
+          {{ form.time_of_day(class="form-select") }}
+        </div>
+        <div class="col-md-5">
+          {{ form.location_type.label(class="form-label") }}
+          {{ form.location_type(class="form-select") }}
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          {{ form.submit(class="btn btn-primary w-100") }}
+        </div>
+      </form>
+
+      <!-- Map -->
+      <div id="map" style="width:100%; height:600px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Plotly JS and map rendering -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript">
+  const graphJSON = JSON.parse(`{{ graphJSON | safe }}`);
+  Plotly.newPlot('map', graphJSON.data, graphJSON.layout, {responsive: true});
+</script>
+{% endblock %}

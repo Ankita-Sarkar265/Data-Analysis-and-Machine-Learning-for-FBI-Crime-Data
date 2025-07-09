@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-warning">Pending Officer Approvals</h2>
+    {% if pending_users %}
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>Username</th>
+          <th>Phone</th>
+          <th>Rank</th>
+          <th>Department</th>
+          <th>Badge ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in pending_users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.full_name }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.rank }}</td>
+          <td>{{ user.department }}</td>
+          <td>{{ user.badge_id }}</td>
+          <td>
+            <form action="{{ url_for('approve_user', user_id=user.id) }}" method="POST">
+              <button type="submit" class="btn btn-success btn-sm">Approve</button>
+               <a href="{{ url_for('disapprove_officer', officer_id=user.id) }}" class="btn btn-danger btn-sm">Disapprove</a>
+            </form>
+           
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h5 class="text-primary">No pending approvals.</h5>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card p-4 shadow-lg" style="max-width: 900px; width: 100%;">
+   <h2 class="text-center text-warning mb-4">Admin Registration</h2>
+
+   <!-- Hidden fake fields to trick browser autocomplete -->
+   <input type="text" name="fakeuser" style="display:none">
+   <input type="password" name="fakepass" style="display:none">
+
+   <form method="POST" autocomplete="off">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group mb-3">
+      {{ form.full_name.label }}
+      {{ form.full_name(class="form-control", autocomplete="off") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ form.email.label }}
+      {{ form.email(class="form-control", autocomplete="off") }}
+    </div>
+    
+    <div class="form-group mb-3">
+      {{ form.phone.label }}
+      {{ form.phone(class="form-control", autocomplete="off") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ form.id.label }}
+      {{ form.id(class="form-control", autocomplete="off") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ form.username.label }}
+      {{ form.username(class="form-control", autocomplete="new-username") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ form.password.label }}
+      {{ form.password(class="form-control", autocomplete="new-password") }}
+    </div>
+
+    <button type="submit" class="btn btn-outline-warning w-500">Register Admin</button>
+  </form>
+  </div>
+</div>
+{% endblock %}

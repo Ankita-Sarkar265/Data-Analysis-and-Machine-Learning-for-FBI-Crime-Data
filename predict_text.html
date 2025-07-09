@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paragraph-Based Crime Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #0f0f2d;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 50px;
+            margin: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #1f1f3f;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            background-color: #2e2e5a;
+            color: white;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #3a0ca3;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #7209b7;
+        }
+        h2, p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📝 Paragraph-Based Crime Prediction</h2>
+        <p>Describe the crime scene in detail and we'll analyze it:</p>
+
+        <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.crime_paragraph.label }}
+        {{ form.crime_paragraph(rows=6, class="form-control") }}
+    </div>
+    <div class="form-group mt-2">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+    </div>
+</body>
+</html>

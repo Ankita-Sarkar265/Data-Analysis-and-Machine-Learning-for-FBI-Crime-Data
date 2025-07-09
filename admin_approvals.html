@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pending Officer Approvals</h2>
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Badge ID</th>
+            <th>Username</th>
+            <th>Approve</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.badge_id }}</td>
+            <td>{{ user.username }}</td>
+            <td>
+                <a href="{{ url_for('approve_user', user_id=user.id) }}" class="btn btn-success btn-sm">Approve</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

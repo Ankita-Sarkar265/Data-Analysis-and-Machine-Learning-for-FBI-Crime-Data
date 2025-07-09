@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Encrypted Uploaded Files</h2>
+<table class="table">
+    <thead><tr><th>Filename</th><th>Actions</th></tr></thead>
+    <tbody>
+        {% for file in files %}
+        <tr>
+            <td>{{ file }}</td>
+            <td>
+                <a href="{{ url_for('download_encrypted', filename=file) }}" class="btn btn-primary btn-sm">Download</a>
+                <a href="{{ url_for('decrypt_view', filename=file) }}" class="btn btn-warning btn-sm">View Decrypted</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

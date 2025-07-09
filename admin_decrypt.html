@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Decrypt Uploaded File (Admin Only)</h2>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="file">Select Encrypted File:</label>
+            <select name="file" class="form-control mb-2" required>
+                <option value="">-- Choose a file --</option>
+                {% for file in files %}
+                    <option value="{{ file }}" {% if file == selected_file %}selected{% endif %}>{{ file }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Decrypt</button>
+    </form>
+
+    {% if content %}
+        <div class="mt-4">
+            <h5>Decrypted Content:</h5>
+            <pre class="bg-light p-3 border">{{ content }}</pre>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

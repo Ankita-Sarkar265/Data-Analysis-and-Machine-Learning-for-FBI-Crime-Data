@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crime Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+        .card {
+            background-color: #16213e;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn {
+            background-color: #0f3460;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #533483;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crime Prediction Portal</h1>
+        <p>Select your preferred input method:</p>
+
+        <div class="card">
+            <h2>🧾 Structured Form Input</h2>
+            <p>Answer a few questions about the crime scenario.</p>
+            <a href="{{ url_for('predict_from_form') }}" class="btn">Go to Form</a>
+
+        </div>
+
+        <div class="card">
+            <h2>📝 Paragraph Input</h2>
+            <p>Describe the crime scenario in a short paragraph.</p>
+            <a href="{{ url_for('predict_from_text') }}" class="btn">Enter Description</a>
+        </div>
+    </div>
+</body>
+</html>

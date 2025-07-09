@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtered Crime Data</title>
+     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center; 
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+        table tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+        table tr:hover {
+            background-color: #3a3a3a;
+        }
+        table th {
+            background-color: #e91e63;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #e91e63;
+            color: #fff;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        a.button:hover {
+            background-color: #c2185b;
+        }
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+<body>
+    <h2>Filtered Results</h2>
+
+    {% if filtered_df.shape[0] == 0 %}
+        <p>No data found for selected filters.</p>
+    {% else %}
+        <table border="1">
+            <tr>
+                {% for col in filtered_df.columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% for idx, row in filtered_df.iterrows() %}
+                <tr>
+                    {% for col in filtered_df.columns %}
+                        <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <div class="button-container">
+  <form action="{{ url_for('filter_form') }}" method="get">
+      <button type="submit" class="back-button">Back to Filter Form</button>
+  </form>
+</div>
+
+
+</body>
+</html>

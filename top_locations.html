@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="chart-container">
+    <h2>Top 10 Crime Locations</h2>
+    {{ pie_chart | safe }}
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">Back to Home</a>
+</div>
+{% endblock %}

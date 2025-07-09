@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1>Blockchain Integrity Verification</h1>
+  {% if is_valid %}
+    <div class="alert alert-success mt-4">
+      ✅ The blockchain is valid and has not been tampered with.
+    </div>
+  {% else %}
+    <div class="alert alert-danger mt-4">
+      ❌ Blockchain integrity failed! Data may have been tampered with.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

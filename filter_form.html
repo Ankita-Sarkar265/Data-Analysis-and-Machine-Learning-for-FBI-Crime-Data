@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filter Crime Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+        .card {
+            background-color: rgb(54, 51, 51);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(33, 9, 155, 0.916);
+            width: 400px;
+            text-align: center;
+        }
+        .card:hover{
+             background-color: #232424;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #f1f3f4;
+            text-shadow: 1px 1px 2px #353232;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            text-align: left;
+            font-weight: bold;
+            color: #fafbfb;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid;
+            font-size: 16px;
+            background-color: #8b9297;
+        }
+        select:hover{ 
+            border-color: #3481f5;
+            color: rgb(4, 13, 68);
+        }
+        button {
+            margin-top: 30px;
+            padding: 12px 24px;
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1f618d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Filter Crime Data</h1>
+        <form method="GET" action="{{ url_for('filtered_data') }}">
+            <label for="year">Year:</label>
+            <select name="year" id="year">
+                <option value="">-- Select Year --</option>
+                {% for y in years %}
+                <option value="{{ y }}">{{ y }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="crime_type">Crime Type:</label>
+            <select name="crime_type" id="crime_type">
+                <option value="">-- Select Crime Type --</option>
+                {% for ct in crime_types %}
+                <option value="{{ ct }}">{{ ct }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="location">Location Type:</label>
+            <select name="location" id="location">
+                <option value="">-- Select Location --</option>
+                {% for loc in locations %}
+                <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Filter Data</button>
+        </form>
+    </div>
+
+</body>
+</html>

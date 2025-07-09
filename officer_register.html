@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card p-4 shadow-lg" style="max-width: 900px; width: 100%;">
+  <h2 class="text-center text-primary mb-4"><i class="fas fa-user-plus me-2"></i>Officer Registration</h2>
+
+  <!-- Fake fields to prevent autofill -->
+  <input type="text" style="display:none">
+  <input type="password" style="display:none">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" autocomplete="off" class="needs-validation" novalidate>
+    {{ form.hidden_tag() }}
+
+    {% for field in [form.full_name, form.email, form.phone, form.rank, form.department, form.badge_id, form.username] %}
+    <div class="mb-3">
+      {{ field.label(class="form-label") }}
+      {{ field(class="form-control", required=True, autocomplete="off") }}
+      {% for error in field.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="mb-3" style="position:relative;">
+      {{ form.password.label(class="form-label") }}
+      {{ form.password(class="form-control", id="password", required=True, minlength="6", autocomplete="new-password") }}
+      <span id="togglePassword" style="position: absolute; top: 38px; right: 15px; cursor: pointer;">👁️</span>
+      {% for error in form.password.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.confirm_password.label(class="form-label") }}
+      {{ form.confirm_password(class="form-control", id="confirm_password", autocomplete="new-password") }}
+      {% for error in form.confirm_password.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <div class="mb-3"> 
+      {{ form.submit(class="btn btn-outline-primary w-30") }} 
+     </div> 
+  </form>
+</div>
+</div>
+<script>
+  // Bootstrap validation
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
+  // Toggle password visibility
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+  togglePassword?.addEventListener('click', function () {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+  });
+</script>
+{% endblock %}

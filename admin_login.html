@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card p-4 shadow-lg" style="max-width: 600px; width: 100%;">
+    <h3 class="text-center text-warning mb-4">Admin Login</h3>
+
+    <!-- Hidden fake fields to disable browser autofill -->
+    <input type="text" name="fakeusernameremembered" style="display:none">
+    <input type="password" name="fakepasswordremembered" style="display:none">
+
+    <form method="POST" action="{{ url_for('admin_login') }}" autocomplete="off">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group mb-3">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username"
+               class="form-control"
+               placeholder="Enter username"
+               autocomplete="new-username"
+               required>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"
+               class="form-control"
+               placeholder="Enter password"
+               autocomplete="new-password"
+               required>
+      </div>
+        <button type="submit" class="btn btn-outline-warning w-30">Login</button>
+      
+    </form>
+  </div>
+</div>
+{% endblock %}
